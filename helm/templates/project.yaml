@@ -18,15 +18,7 @@ spec:
     - nexus
     - feature-*
   sourceRepos:
-    - "https://github.com/mehmetsalgar/Akka-Finite-State-Machine.git"
-    - "https://github.com/mehmetsalgar/address-check.git"
-    - "https://github.com/mehmetsalgar/credit-score.git"
-    - "https://github.com/mehmetsalgar/fraud-prevention.git"
-    - "https://github.com/mehmetsalgar/customer-relationship-adapter.git"
-    - "https://sonatype.github.io/helm3-charts/"
-    - "http://fsmakka.salgar.org/repository/fsm-akka-helm/"
-    - "http://nexus-nexus-repository-manager.nexus:8081/repository/fsm-akka-helm/"
-    - "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"
+    {{ toYaml .Values.sourceRepos }}
   clusterResourceWhitelist:
     - group: "*"
       kind: "*"
