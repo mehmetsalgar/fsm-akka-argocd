@@ -8,15 +8,24 @@ spec:
   description: "Project for FSM Akka Four Eyes Event Sourcing Application"
   destinations:
     - namespace: fsmakka
-      server: https://kubernetes.default.svc
-    - namespace: nexus
-      server: https://kubernetes.default.svc
+      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
     - namespace: feature-*
-      server: https://kubernetes.default.svc
+      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+    - namespace: integration-*
+      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+    - namespace: release-*
+      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+    - namespace: bugfix-*
+      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+    - namespace: hotfix-*
+      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
   sourceNamespaces:
     - fsmakka
-    - nexus
     - feature-*
+    - integration-*
+    - release-*
+    - bugfix-*
+    - hotfix-*
   sourceRepos:
     {{ toYaml .Values.sourceRepos }}
   clusterResourceWhitelist:

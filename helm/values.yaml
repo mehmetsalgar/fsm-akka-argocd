@@ -2,9 +2,6 @@ projects:
   enabled: false
 argo-cd:
   enabled: true
-  global:
-    image:
-      tag: "v2.5.2@sha256:d9bad4c5ed867bd59ea1954f75988f5d1c8491a4eef5bd75f47b13a4bd1a53dc"
   dex:
     enabled: false
   controller:
@@ -18,6 +15,9 @@ argo-cd:
       - "*"
     config:
       repositories: |
+        - name: fsm-akka
+          type: git
+          url: "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"
         - name: nexus-repository-manager
           type: helm
           url: "https://sonatype.github.io/helm3-charts/"

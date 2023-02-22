@@ -1,0 +1,4 @@
+argo-cd:
+  global:
+    image:
+      tag: "v2.5.2@sha256:d9bad4c5ed867bd59ea1954f75988f5d1c8491a4eef5bd75f47b13a4bd1a53dc"
