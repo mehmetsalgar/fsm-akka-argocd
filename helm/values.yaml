@@ -1,5 +1,7 @@
 projects:
   enabled: false
+  sourceRepos:
+    - "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"
 argo-cd:
   enabled: true
   dex:
@@ -15,9 +17,6 @@ argo-cd:
       - "*"
     config:
       repositories: |
-        - name: fsm-akka
-          type: git
-          url: "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"
         - name: nexus-repository-manager
           type: helm
           url: "https://sonatype.github.io/helm3-charts/"
@@ -33,4 +32,3 @@ argo-cd:
         - name: metrics-server
           type: helm
           url: "https://kubernetes-sigs.github.io/metrics-server/"
-        
