@@ -8,23 +8,23 @@ spec:
   description: "Project for FSM Akka Four Eyes Event Sourcing Application"
   destinations:
     - namespace: fsmakka
-      name: fsmakkaAKS
-      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+      name: {{ .Values.cluster.name }}
+      server: {{ .Values.cluster.url }}
     - namespace: feature-*
-      name: fsmakkaAKS
-      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+      name: {{ .Values.cluster.name }}
+      server: {{ .Values.cluster.url }}
     - namespace: integration-*
-      name: fsmakkaAKS
-      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+      name: {{ .Values.cluster.name }}
+      server: {{ .Values.cluster.url }}
     - namespace: release-*
-      name: fsmakkaAKS
-      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+      name: {{ .Values.cluster.name }}
+      server: {{ .Values.cluster.url }}
     - namespace: bugfix-*
-      name: fsmakkaAKS
-      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+      name: {{ .Values.cluster.name }}
+      server: {{ .Values.cluster.url }}
     - namespace: hotfix-*
-      name: fsmakkaAKS
-      server: https://fsmakkaaks-dns-d9052bcd.hcp.germanywestcentral.azmk8s.io:443
+      name: {{ .Values.cluster.name }}
+      server: {{ .Values.cluster.url }}
   sourceNamespaces:
     - fsmakka
     - feature-*
