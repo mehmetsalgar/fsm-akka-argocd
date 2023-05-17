@@ -1,0 +1,3 @@
+projects:
+  sourceRepos:
+    - "https://github.com/mehmetsalgar/fsm-akka-test-environment.git"

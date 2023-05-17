@@ -1,7 +1,5 @@
 projects:
   enabled: false
-  sourceRepos:
-    - "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"
 
 argo-cd:
   enabled: true

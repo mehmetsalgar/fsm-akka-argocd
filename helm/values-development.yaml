@@ -1,2 +1,3 @@
-sourceRepos:
-  - "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"
+projects:
+  sourceRepos:
+    - "https://github.com/mehmetsalgar/fsm-akka-dev-environment.git"

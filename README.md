@@ -1,5 +1,6 @@
-helm upgrade --install argocd . --create-namespace -n argocd
-helm upgrade --install argocd . --create-namespace -n argocd --set projects.enabled=true
+helm upgrade --install argocd . --create-namespace -n argocd -f values-development.yaml -f values-gke.yaml
+helm upgrade --install argocd . --create-namespace -n argocd -f values-test.yaml -f values-gke.yaml
+helm upgrade --install argocd . --create-namespace -n argocd --set projects.enabled=true -f values-development.yaml -f values-gke.yaml
 
 helm delete argocd -n argocd
 
