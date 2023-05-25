@@ -70,7 +70,7 @@ Create the name of the service account to use
   },
   "tlsClientConfig": {
     "insecure": false,
-    "caData": "{{- printf "%s" .Values.clusterDayOver.caData  }}"
+    "caData": "{{- printf "%s" .Values.clusterDayOver.caData }}"
   }
 }
 {{- end }}

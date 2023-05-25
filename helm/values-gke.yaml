@@ -1,8 +1,12 @@
 cluster:
   name: fsmakkaGKE
+  url: "dummy"
+  config: "dummy"
 
 clusterDayOver:
   name: fsmakkaGKEDayOver
+  url: "dummy"
+  caData: "dummy"
 
 argo-cd:
   enabled: true
