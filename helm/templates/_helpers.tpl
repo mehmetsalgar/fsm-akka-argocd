@@ -60,3 +60,17 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{- define "argocd.gke-configuration" -}}
+{
+  "execProviderConfig": {
+    "command": "argocd-k8s-auth",
+    "args": ["gcp"],
+    "apiVersion": "client.authentication.k8s.io/v1beta1"
+  },
+  "tlsClientConfig": {
+    "insecure": false,
+    "caData": "{{- printf "%s" .Values.clusterDayOver.caData  }}"
+  }
+}
+{{- end }}

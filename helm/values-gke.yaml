@@ -1,0 +1,11 @@
+cluster:
+  name: fsmakkaGKE
+
+clusterDayOver:
+  name: fsmakkaGKEDayOver
+
+argo-cd:
+  enabled: true
+  global:
+    nodeSelector:
+      iam.gke.io/gke-metadata-server-enabled: "true"

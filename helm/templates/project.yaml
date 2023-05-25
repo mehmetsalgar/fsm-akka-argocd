@@ -25,6 +25,25 @@ spec:
     - namespace: hotfix-*
       name: {{ .Values.cluster.name }}
       server: {{ .Values.cluster.url }}
+      #day over
+    - namespace: fsmakka
+      name: {{ .Values.clusterDayOver.name }}
+      server: {{ .Values.clusterDayOver.url }}
+    - namespace: feature-*
+      name: {{ .Values.clusterDayOver.name }}
+      server: {{ .Values.clusterDayOver.url }}
+    - namespace: integration-*
+      name: {{ .Values.clusterDayOver.name }}
+      server: {{ .Values.clusterDayOver.url }}
+    - namespace: release-*
+      name: {{ .Values.clusterDayOver.name }}
+      server: {{ .Values.clusterDayOver.url }}
+    - namespace: bugfix-*
+      name: {{ .Values.clusterDayOver.name }}
+      server: {{ .Values.clusterDayOver.url }}
+    - namespace: hotfix-*
+      name: {{ .Values.clusterDayOver.name }}
+      server: {{ .Values.clusterDayOver.url }}
   sourceNamespaces:
     - fsmakka
     - feature-*
