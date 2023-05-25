@@ -41,6 +41,7 @@ jobs:
           helm repo add argo-cd https://argoproj.github.io/argo-helm
           helm repo up
           helm dep up
+          echo "certificate: $(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka --format json | jq -j '.masterAuth.clusterCaCertificate')"
           helm upgrade argocd . --install --create-namespace -n argocd -f values-development.yaml -f values-gke.yaml --set projects.enabled=true --set cluster.url=${{ secrets.CLUSTER_URL }} --set cluster.config=${{ secrets.CLUSTER_CONFIG }} --set clusterDayOver.url=$(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV }} --zone europe-west3-c --project fsmakka --format json | jq -j '.endpoint') --set clusterDayOver.caData=$(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka --format json | jq -j '.masterAuth.clusterCaCertificate') --set argo-cd.controller.serviceAccount.annotations.iam.gke.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} --set argo-cd.server.serviceAccount.annotations.iam.gke.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} --set argo-cd.repoServer.serviceAccount.annotations.iam.gke.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }} --set argo-cd.applicationSet.serviceAccount.annotations.iam.gke.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }}
       - name: Check Failure
         if: steps.helmCommand.outcome != 'success'
