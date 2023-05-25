@@ -37,6 +37,7 @@ jobs:
           export USE_GKE_GCLOUD_AUTH_PLUGIN=True
           gcloud container clusters get-credentials ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka;
           gcloud container clusters get-credentials ${{ vars.CLUSTER_NAME_DEV }} --zone europe-west3-c --project fsmakka;
+          cd helm
           helm upgrade argocd \
                        . \
                        --install \ 
