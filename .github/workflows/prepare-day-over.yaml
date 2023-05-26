@@ -29,6 +29,9 @@ jobs:
         shell: bash
         env:
           SERVICE_ACCOUNT: ${{ secrets.GCP_CREDENTIALS }}
+          CLUSTER_URL: ${{ secrets.CLUSTER_URL }}
+          CLUSTER_CONFIG: ${{ secrets.CLUSTER_CONFIG }}
+          GCP_SERVICE_ACCOUNT: ${{ secrets.GCP_SERVICE_ACCOUNT }}
         run: |
           echo $SERVICE_ACCOUNT > /tmp/${{ github.run_id }}.json
           gcloud auth activate-service-account --key-file /tmp/${{ github.run_id }}.json
@@ -41,7 +44,11 @@ jobs:
           helm repo add argo-cd https://argoproj.github.io/argo-helm
           helm repo up
           helm dep up
-          helm upgrade argocd . --install --create-namespace -n argocd -f values-development.yaml -f values-gke.yaml --set projects.enabled=true --set cluster.url=${{ secrets.CLUSTER_URL }} --set cluster.config=${{ secrets.CLUSTER_CONFIG }} --set clusterDayOver.url=$(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka --format json | jq -j '.endpoint') --set clusterDayOver.caData=$(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka --format json | jq -j '.masterAuth.clusterCaCertificate') --set argo-cd.controller.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }}" --set argo-cd.server.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }}" --set argo-cd.repoServer.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }}" --set argo-cd.applicationSet.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=${{ secrets.GCP_SERVICE_ACCOUNT }}"
+          CLUSTER_DAY_OVER_URL=$(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka --format json | jq -j '.endpoint')
+          echo "URL: $CLUSTER_DAY_OVER_URL"
+          CLUSTER_DAY_OVER_CA_DATA=$(gcloud container clusters describe ${{ vars.CLUSTER_NAME_DEV_DAY_OVER }} --zone europe-west3-c --project fsmakka --format json | jq -j '.masterAuth.clusterCaCertificate')
+          echo "caData: $CLUSTER_DAY_OVER_CA_DATA"
+          helm upgrade argocd . --install --create-namespace -n argocd -f values-development.yaml -f values-gke.yaml --set projects.enabled=true --set cluster.url=$CLUSTER_URL --set cluster.config=$CLUSTER_CONFIG --set clusterDayOver.url=$CLUSTER_DAY_OVER_URL --set clusterDayOver.caData=$CLUSTER_DAY_OVER_CA_DATA --set argo-cd.controller.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=$GCP_SERVICE_ACCOUNT" --set argo-cd.server.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=$GCP_SERVICE_ACCOUNT" --set argo-cd.repoServer.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=$GCP_SERVICE_ACCOUNT" --set argo-cd.applicationSet.serviceAccount.annotations."iam\.gke\.io/gcp-service-account=$GCP_SERVICE_ACCOUNT"
       - name: Check Failure
         if: steps.helmCommand.outcome != 'success'
         run: exit 1
